@@ -34,19 +34,20 @@ app.post("/", (req, res) => {
   const request = https.request(url, options, (response) => {
     response.on("data", (data) => {
       //console.log(JSON.parse(data));
-    });
+    }); 
     if (response.statusCode === 200) {
       res.sendFile(__dirname + "/success.html");
     } else {
       res.sendFile(__dirname + "/failure.html");
-    }
+    }   
+    console.log(response.statusCode);
   });
   request.write(jsonData);
   request.end();
 });
 
 app.post("/failure", (req, res) => {
-  res.redirect("/")
+  res.redirect("/");
 });
 
 app.listen(process.env.PORT || 3000, () => {
